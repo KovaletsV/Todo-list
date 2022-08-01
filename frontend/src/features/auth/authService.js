@@ -1,8 +1,9 @@
 import axios from "axios";
 
+//1. create api url
 const API_URL = "/api/users/";
 
-// Register user
+//2. Register user
 const register = async userData => {
     const response = await axios.post(API_URL, userData);
 
@@ -13,7 +14,7 @@ const register = async userData => {
     return response.data;
 };
 
-// Login user
+// Login user (pass to authSlice)
 const login = async userData => {
     const response = await axios.post(API_URL + "login", userData);
 

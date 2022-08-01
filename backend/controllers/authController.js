@@ -23,9 +23,9 @@ class authController {
             await user.save();
 
             res.status(201).json({
-                _id: user.id,
-                email: user.email,
-                password: user.password,
+                // _id: user.id,
+                // email: user.email,
+                // password: user.password,
                 token: generateToken(user._id)
             });
         } catch (error) {
@@ -60,12 +60,7 @@ class authController {
     }
     async getUsers(req, res) {
         try {
-            const { _id, email, password } = await User.findById(req.user.id);
-            res.status(201).json({
-                id: _id,
-                email,
-                password
-            });
+            res.status(201).json(req.user);
         } catch (error) {
             console.log(error);
         }

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import TodoForm from "../components/TodoForm";
+import TodoForm from "../components/TodoForm";
 
 function Dashboard() {
     const navigate = useNavigate();
@@ -17,11 +17,11 @@ function Dashboard() {
     return (
         <>
             <section className="heading">
-                <h1>Welcome {user && user.name}</h1>
+                <h1>Welcome</h1>
                 <p>Todo Dashboard</p>
             </section>
 
-            {/* <TodoForm /> */}
+            <TodoForm />
 
             <section className="content"></section>
         </>

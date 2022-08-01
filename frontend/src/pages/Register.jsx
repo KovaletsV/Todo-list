@@ -1,9 +1,9 @@
-import { useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify";
-// import { register, reset } from "../features/auth/authSlice";
-// import Spinner from "../components/Spinner";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { register, reset } from "../features/auth/authSlice";
+import Spinner from "../components/Spinner";
 
 function Register() {
     // 1. Create our form
@@ -17,24 +17,27 @@ function Register() {
     //2. Destructing data
     const { email, password } = formData;
 
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    //6. initialize navigate and dispatch
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    // const { user, isLoading, isError, isSuccess, message } = useSelector(
-    //     state => state.auth
-    // );
+    //7. Destructing from authSlice
+    const { user, isLoading, isError, isSuccess, message } = useSelector(
+        state => state.auth
+    );
 
-    // useEffect(() => {
-    //     if (isError) {
-    //         toast.error(message);
-    //     }
-
-    //     if (isSuccess || user) {
-    //         navigate("/");
-    //     }
-
-    //     dispatch(reset());
-    // }, [user, isError, isSuccess, message, navigate, dispatch]);
+    //10.
+    useEffect(() => {
+        if (isError) {
+            toast.error(message);
+        }
+        // if isSuccess change from false to true or user was loged in and we bring a token
+        if (isSuccess || user) {
+            navigate("/");
+        }
+        // reset a state
+        dispatch(reset());
+    }, [user, isError, isSuccess, message, navigate, dispatch]);
 
     //4. Changing control input
     const onChange = e => {
@@ -48,20 +51,18 @@ function Register() {
     const onSubmit = e => {
         e.preventDefault();
 
-        // if (password !== password2) {
-        //     toast.error("Passwords do not match");
-
-        // const userData = {
-        //     email,
-        //     password
-        // };
-
-        // dispatch(register(userData));
+        //8. Create a user
+        const userData = {
+            email,
+            password
+        };
+        //9.Dispatch register function and pass a new user
+        dispatch(register(userData));
     };
 
-    // if (isLoading) {
-    //     return <Spinner />;
-    // }
+    if (isLoading) {
+        return <Spinner />;
+    }
 
     return (
         //3. Create section form

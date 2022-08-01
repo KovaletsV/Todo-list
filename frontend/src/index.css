@@ -5,10 +5,45 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root {
+  --color-1: #186cb8;
+
+  --color-3: #f1b211;
+
+}
 
 body {
   font-family: 'Poppins', sans-serif;
   height: 100vh;
+}
+
+.logo {
+  line-height: 1;
+  display: grid;
+  /* put in the centre */
+  place-items: center;
+}
+.logo h1 {
+  font-family: sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+
+  /* подстраиваем ширину заголовка под самое длинное слово*/
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin: auto;
+  text-transform: uppercase;
+  /* делаем цветные полосы по тексту */
+background: linear-gradient(200deg, 
+var(--color-1) 49%, 
+var(--color-3) 51%,var(--color-3) 80% ,
+var(--color-3) 80%);
+/* обрезаем фон по контуру букв */
+background-clip: text;
+-webkit-background-clip: text;
+/* делаем заголовок прозрачным, чтобы был виден цветной фон */
+color: transparent;
 }
 
 a {
@@ -137,9 +172,9 @@ h3 {
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 5px;
-  background: #000;
+  background: rgb(7, 37, 44);
   color: #fff;
   font-size: 16px;
   font-weight: 700;

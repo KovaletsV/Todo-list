@@ -9,7 +9,7 @@ const initialState = {
     message: ""
 };
 
-// Create new todo
+// //1. Create new todo
 export const createTodo = createAsyncThunk(
     "todos/create",
     async (todoData, thunkAPI) => {
@@ -28,43 +28,43 @@ export const createTodo = createAsyncThunk(
     }
 );
 
-// // Get user todos
-// export const getTodos = createAsyncThunk(
-//     "todos/getAll",
-//     async (_, thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token;
-//             return await todoService.getTodos(token);
-//         } catch (error) {
-//             const message =
-//                 (error.response &&
-//                     error.response.data &&
-//                     error.response.data.message) ||
-//                 error.message ||
-//                 error.toString();
-//             return thunkAPI.rejectWithValue(message);
-//         }
-//     }
-// );
+// // // Get user todos
+// // export const getTodos = createAsyncThunk(
+// //     "todos/getAll",
+// //     async (_, thunkAPI) => {
+// //         try {
+// //             const token = thunkAPI.getState().auth.user.token;
+// //             return await todoService.getTodos(token);
+// //         } catch (error) {
+// //             const message =
+// //                 (error.response &&
+// //                     error.response.data &&
+// //                     error.response.data.message) ||
+// //                 error.message ||
+// //                 error.toString();
+// //             return thunkAPI.rejectWithValue(message);
+// //         }
+// //     }
+// // );
 
-// // Delete user todo
-// export const deleteTodo = createAsyncThunk(
-//     "todos/delete",
-//     async (id, thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token;
-//             return await todoService.deleteTodo(id, token);
-//         } catch (error) {
-//             const message =
-//                 (error.response &&
-//                     error.response.data &&
-//                     error.response.data.message) ||
-//                 error.message ||
-//                 error.toString();
-//             return thunkAPI.rejectWithValue(message);
-//         }
-//     }
-// );
+// // // Delete user todo
+// // export const deleteTodo = createAsyncThunk(
+// //     "todos/delete",
+// //     async (id, thunkAPI) => {
+// //         try {
+// //             const token = thunkAPI.getState().auth.user.token;
+// //             return await todoService.deleteTodo(id, token);
+// //         } catch (error) {
+// //             const message =
+// //                 (error.response &&
+// //                     error.response.data &&
+// //                     error.response.data.message) ||
+// //                 error.message ||
+// //                 error.toString();
+// //             return thunkAPI.rejectWithValue(message);
+// //         }
+// //     }
+// // );
 
 export const todoSlice = createSlice({
     name: "todo",

@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-// Get user from localStorage
+//2. Get user from localStorage
 const user = JSON.parse(localStorage.getItem("user"));
 
+//1.Create initial state
 const initialState = {
     user: user ? user : null,
     isError: false,
@@ -12,7 +13,7 @@ const initialState = {
     message: ""
 };
 
-// Register user
+// 5. Register user
 export const register = createAsyncThunk(
     "auth/register",
     async (user, thunkAPI) => {
@@ -30,7 +31,7 @@ export const register = createAsyncThunk(
     }
 );
 
-// Login user
+// Login user (from service and pass to extra reducer)
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     try {
         return await authService.login(user);
@@ -45,14 +46,17 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     }
 });
 
+// Create a logout function and pass in a header
 export const logout = createAsyncThunk("auth/logout", async () => {
     await authService.logout();
 });
 
+//3.Create auth slice for reducers
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+        //4. Regular reducer to be able to dispatch after register
         reset: state => {
             state.isLoading = false;
             state.isSuccess = false;
@@ -60,8 +64,11 @@ export const authSlice = createSlice({
             state.message = "";
         }
     },
+    //6. Create extra reducer for pending fullfield and rejected and pass in register form
     extraReducers: builder => {
         builder
+
+            // Case for register
             .addCase(register.pending, state => {
                 state.isLoading = true;
             })
@@ -73,9 +80,12 @@ export const authSlice = createSlice({
             .addCase(register.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
+                //message from ----> thunkAPI.rejectWithValue(message);
                 state.message = action.payload;
                 state.user = null;
             })
+
+            // Case for login (pass in login page)
             .addCase(login.pending, state => {
                 state.isLoading = true;
             })
@@ -90,6 +100,8 @@ export const authSlice = createSlice({
                 state.message = action.payload;
                 state.user = null;
             })
+
+            // Case for logout
             .addCase(logout.fulfilled, state => {
                 state.user = null;
             });
