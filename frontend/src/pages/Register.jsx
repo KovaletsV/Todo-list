@@ -1,39 +1,42 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { register, reset } from "../features/auth/authSlice";
-import Spinner from "../components/Spinner";
+import { useState } from "react";
+// import { useSelector, useDispatch } from "react-redux";
+// import { useNavigate } from "react-router-dom";
+// import { toast } from "react-toastify";
+// import { register, reset } from "../features/auth/authSlice";
+// import Spinner from "../components/Spinner";
 
 function Register() {
+    // 1. Create our form
     const [formData, setFormData] = useState({
-        name: "",
+        // name: "",
         email: "",
-        password: "",
-        password2: ""
+        password: ""
+        // password2: ""
     });
 
-    const { name, email, password, password2 } = formData;
+    //2. Destructing data
+    const { email, password } = formData;
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch();
 
-    const { user, isLoading, isError, isSuccess, message } = useSelector(
-        state => state.auth
-    );
+    // const { user, isLoading, isError, isSuccess, message } = useSelector(
+    //     state => state.auth
+    // );
 
-    useEffect(() => {
-        if (isError) {
-            toast.error(message);
-        }
+    // useEffect(() => {
+    //     if (isError) {
+    //         toast.error(message);
+    //     }
 
-        if (isSuccess || user) {
-            navigate("/");
-        }
+    //     if (isSuccess || user) {
+    //         navigate("/");
+    //     }
 
-        dispatch(reset());
-    }, [user, isError, isSuccess, message, navigate, dispatch]);
+    //     dispatch(reset());
+    // }, [user, isError, isSuccess, message, navigate, dispatch]);
 
+    //4. Changing control input
     const onChange = e => {
         setFormData(prevState => ({
             ...prevState,
@@ -41,27 +44,27 @@ function Register() {
         }));
     };
 
+    //5. Submit the form
     const onSubmit = e => {
         e.preventDefault();
 
-        if (password !== password2) {
-            toast.error("Passwords do not match");
-        } else {
-            const userData = {
-                name,
-                email,
-                password
-            };
+        // if (password !== password2) {
+        //     toast.error("Passwords do not match");
 
-            dispatch(register(userData));
-        }
+        // const userData = {
+        //     email,
+        //     password
+        // };
+
+        // dispatch(register(userData));
     };
 
-    if (isLoading) {
-        return <Spinner />;
-    }
+    // if (isLoading) {
+    //     return <Spinner />;
+    // }
 
     return (
+        //3. Create section form
         <>
             <section className="heading">
                 <h1>Register</h1>
@@ -70,7 +73,7 @@ function Register() {
 
             <section className="form">
                 <form onSubmit={onSubmit}>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <input
                             type="text"
                             className="form-control"
@@ -80,7 +83,7 @@ function Register() {
                             placeholder="Enter your name"
                             onChange={onChange}
                         />
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <input
                             type="email"
@@ -99,11 +102,11 @@ function Register() {
                             id="password"
                             name="password"
                             value={password}
-                            placeholder="Enter password"
+                            placeholder="Enter your password"
                             onChange={onChange}
                         />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <input
                             type="password"
                             className="form-control"
@@ -113,7 +116,7 @@ function Register() {
                             placeholder="Confirm password"
                             onChange={onChange}
                         />
-                    </div>
+                    </div> */}
                     <div className="form-group">
                         <button type="submit" className="btn btn-block">
                             Submit

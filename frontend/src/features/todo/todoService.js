@@ -16,35 +16,33 @@ const createTodo = async (todoData, token) => {
 };
 
 // Get user todos
-const getTodos = async token => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
+// const getTodos = async token => {
+//     const config = {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         }
+//     };
 
-    const response = await axios.get(API_URL, config);
+//     const response = await axios.get(API_URL, config);
 
-    return response.data;
-};
+//     return response.data;
+// };
 
-// Delete user todo
-const deleteTodo = async (todoId, token) => {
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    };
+// // Delete user todo
+// const deleteTodo = async (todoId, token) => {
+//     const config = {
+//         headers: {
+//             Authorization: `Bearer ${token}`
+//         }
+//     };
 
-    const response = await axios.delete(API_URL + todoId, config);
+//     const response = await axios.delete(API_URL + todoId, config);
 
-    return response.data;
-};
+//     return response.data;
+// };
 
 const todoService = {
-    createTodo,
-    getTodos,
-    deleteTodo
+    createTodo
 };
 
 export default todoService;
